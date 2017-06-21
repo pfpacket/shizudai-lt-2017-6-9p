@@ -6,10 +6,10 @@
 
 # 自己紹介
 ## IT悟空
-名前: 棟方 亮<br>
-所属: 情報社会学科一年, ITS<br>
-twitter: [@pf\_packet](https://twitter.com/pf_packet "Twitter")<br>
-GitHub: [@pfpacket](https://github.com/pfpacket "GitHub")<br>
+名前: 棟方 亮  
+所属: 情報社会学科一年, ITS  
+twitter: [@pf\_packet](https://twitter.com/pf_packet "Twitter")  
+GitHub: [@pfpacket](https://github.com/pfpacket "GitHub")  
 --
 
 # 自己紹介
@@ -23,37 +23,37 @@ GitHub: [@pfpacket](https://github.com/pfpacket "GitHub")<br>
 ---
 
 # 目次
- ファイルシステム とは
- Userspace filesystem
- FUSE
- 9P
- まとめ
- 参考文献
+ ファイルシステムとは  
+ Userspace filesystem  
+ FUSE  
+ 9P  
+ まとめ  
+ 参考文献  
 ---
 
 # ファイルシステム とは
-計算機の資源を操作するための、OSが持つ機能の一つ<br>
+計算機の資源を操作するための、OSが持つ機能の一つ  
 Unix系OSでは、ファイルは記憶装置上のファイルに留まらず、資源
-(tty, プリンタ, ブロックデバイス、キャラクターデバイス等)をファイルとして表現している<br>
+(tty, プリンタ, ブロックデバイス、キャラクターデバイス等)をファイルとして表現している  
 ---
 
 # Userspace filesystem
-カーネル空間だるい<br>
-ユーザー空間でファイルシステム組めれば、より安全、簡便<br>
+カーネル空間だるい  
+ユーザー空間でファイルシステム組めれば、より安全、簡便  
 _速度は落ちるが…_
 ---
 
 # FUSE
-_Filesystem in Userspace_<br>
+_Filesystem in Userspace_  
 通常のユーザーアプリケーションとして、ファイルシステムを実装出来る
 * 既存のコードやライブラリを利用可能
-* Cへのバインディングを作成すれば、様々の言語でファイルシステムを作成出来る<br>
+* Cへのバインディングを作成すれば、様々の言語でファイルシステムを作成出来る  
 _9pというネットワーク透過なUserspace filesystemがあるのに…_
 ---
 
 # 9P
-ベル研の開発した分散OSであるPlan 9のネットワークプロトコル<br>
-Plan 9は分散透過でファイルを単なる資源としてだけでなく、サービスとして捉えた。9Pがこれを支えている。<br>
+ベル研の開発した分散OSであるPlan 9のネットワークプロトコル  
+Plan 9は分散透過でファイルを単なる資源としてだけでなく、サービスとして捉えた。9Pがこれを支えている。  
 ```
 例: IP, TCP等のネットワーク、ウィンドウシステム等
 ```
@@ -61,7 +61,7 @@ Plan 9は分散透過でファイルを単なる資源としてだけでなく�
 
 # 9P
 ## Linuxの対応
-Linuxカーネルには9Pのカーネルモジュール(9p, 9pnet)が入っている。<br>
+Linuxカーネルには9Pのカーネルモジュール(9p, 9pnet)が入っている。  
 ```bash
 modinfo 9p
 modinfo 9pnet
@@ -87,9 +87,9 @@ CONFIG_NET_9P_DEBUG=y
 
 # 9P
 ## ネットワーク透過
-簡単に云えば、nfsみたいなこと。<br>
-ネットワークを越えてマウント出来て、利用者がそのファイルシステムが本当は何処にあるのか意識する必要が無い。<br>
-FUSEと同じく、ファイルシステムはユーザー空間で動く。<br>
+簡単に云えば、nfsみたいなこと。  
+ネットワークを越えてマウント出来て、利用者がそのファイルシステムが本当は何処にあるのか意識する必要が無い。  
+FUSEと同じく、ファイルシステムはユーザー空間で動く。  
 ---
 
 # わざわざFUSE使うより、9P使ったほうがいいのでは? (迫真)
@@ -124,10 +124,10 @@ sudo mount -t 9p -o version=9p2000.L,trans=tcp,port=564,uname=$USER,access=user 
 
 # まとめ
 ## rust-9pを使えば
-* ユーザー空間でファイルシステムを動かす<br>
-→安全、容易<br>
-* Rustで書ける<br>
-→安全<br>
+* ユーザー空間でファイルシステムを動かす  
+→安全、容易  
+* Rustで書ける  
+→安全  
 従って、安全かつ容易にファイルシステムが書ける!
 ---
 
